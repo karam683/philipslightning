@@ -48,21 +48,26 @@ updateCity: function (req,res){
 	var oDataPayload ={
     "value": [
         		{
-	            		"_time": "2017-11-24T11:11:36.000Z",
-	            		"PLLatitude": "51.509865",
-	            		"PLLongitude": "-0.118092",
-	            		"city": cityName,
-	            		"rhtest1id": null,
-	            		"rhtest1name": null
+	        "_time": "2018-01-05T11:11:36.000Z",
+            "zipcode": "EC3A",
+            "country": "U.K",
+            "PLLatitude": "51.513406",
+            "PLLongitude": "-0.084066",
+            "city": cityName,
+            "street": "Bishopsgate City of London (Stop R), London EC3V 3QE, UK",
+            "rhtest1id": null,
+            "rhtest1name": null
         		}
     		]
 		}
 	var loadingThings = nodeAE.put("/Things('07544495CE0C4AEDBF493D5F2D298CDC')/hcl.mlai.rhlighttest1:pldemoscreenfields/Default", oDataPayload)
 	loadingThings.then(
   		function success (oResponse) {
-    		console.log(JSON.parse(oResponse.body)) // will print all Things on the console
+    		console.log("200 OK") // will print all Things on the console
+    		res.send("200 OK");
   		},
   		function error (err) {
+  			res.send(err);
    		 throw err
  		 }
 	)
@@ -90,8 +95,10 @@ UpdatePowerConsumption:function (req,res){
 	loadingThings.then(
   		function success (oResponse) {
     		console.log("200 OK") // will print all Things on the console
+    		 res.send("200 OK");
   		},
   		function error (err) {
+   		 res.send(err);
    		 throw err
  		 }
 	)
