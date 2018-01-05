@@ -66,6 +66,35 @@ updateCity: function (req,res){
    		 throw err
  		 }
 	)
+},
+UpdatePowerConsumption:function (req,res){
+	var powerConsumptionCurrent=req.params.power;
+	var power24Hours=powerConsumptionCurrent*1440;
+	var powerTotalWeek=power24Hours*7;
+	var powerConsumptionCurrentCycle=powerTotalWeek*4;
+
+	var oDataPayload ={
+    "value": [
+        {
+            "_time": "2018-01-05T18:13:56.000Z",
+            "Utilisation": 98,
+            "PowerConsumptionInCurrentCycle": powerConsumptionCurrentCycle,
+            "PowerTotal24hours": power24Hours,
+            "TimeOn": 37,
+            "CurrentPowerConsumption": powerConsumptionCurrent,
+            "PowerTotalWeek": powerTotalWeek
+        }
+        ]
+    }
+	var loadingThings = nodeAE.put("/Things('07544495CE0C4AEDBF493D5F2D298CDC')/hcl.mlai.rhlighttest1:pldemoscreenfields/PLCalculated", oDataPayload)
+	loadingThings.then(
+  		function success (oResponse) {
+    		console.log("200 OK") // will print all Things on the console
+  		},
+  		function error (err) {
+   		 throw err
+ 		 }
+	)
 }
 
 
