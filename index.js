@@ -6,6 +6,7 @@ app.use('/getThing/:thingid', api.getByThingId)
 app.use('/getAllThings', api.getAllThings)
 app.use('/ChangeLocation/:city', api.updateCity)
 app.use('/UpdatePowerConsumption/:power', api.UpdatePowerConsumption)
+app.use('/getCompositeThings', api.getCompositeThings)
 
 
 app.listen(process.env.PORT || 3000, function () {

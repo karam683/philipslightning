@@ -3,9 +3,9 @@ var NodeAE = require('./sdk/iot-application-services-sdk-nodejs-master')
 var nodeAE = new NodeAE()
 
 // set the base URI for the NodeWrapper
-nodeAE.setBaseURI('appiot-mds') // 'appiot-mds' = the app of the API we will use in the following
-//nodeAE.setBaseURI("composite-things-odata")
-
+//nodeAE.setBaseURI('appiot-mds') // 'appiot-mds' = the app of the API we will use in the following
+nodeAE.setBaseURI('composite-things-odata')
+//nodeAE.setBaseURI('advancedlist-thing-sap')
 module.exports = {
 
 getByThingId: function (req,res){
@@ -28,6 +28,22 @@ getByThingId: function (req,res){
 
 getAllThings: function (req,res){
 	var loadingThings = nodeAE.get('/Things')
+
+	loadingThings.then(
+	  function success (oResponse) {
+	    console.log(JSON.parse(oResponse.body)) // will print all Things on the console
+	    res.send(oResponse.body);
+	  },
+	  function error (err) {
+	    res.send(err);
+	    throw err
+	  }
+	)
+
+},
+
+getCompositeThings: function (req,res){
+	var loadingThings = nodeAE.get('/CompositeThings/v1/Things')
 
 	loadingThings.then(
 	  function success (oResponse) {
